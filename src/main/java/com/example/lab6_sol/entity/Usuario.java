@@ -1,7 +1,7 @@
 package com.example.lab6_sol.entity;
 
 import jakarta.persistence.*;
-
+import jakarta.validation.constraints.*;
 @Entity
 @Table(name = "usuario")
 public class Usuario {
@@ -12,15 +12,25 @@ public class Usuario {
     private int id;
 
     @Column(nullable = false)
+    @NotBlank
+    @Size(min=3 , max = 100 , message = "En nombre debe estar  entre 3 y 100 caracteres.")
     private String nombres;
 
     @Column(nullable = false)
+    @NotBlank
+    @Size(min=3 , max = 100 , message = "En apellido debe estar  entre 3 y 100 caracteres.")
     private String apellidos;
 
     @Column(nullable = false)
+    @NotBlank
+    @Digits(message = "El DNI debe ser un número y tener 8 digitos", integer = 8, fraction = 0)
+    @Size(min = 8, max = 8)
     private String dni;
 
     @Column(nullable = false)
+    @NotBlank
+    @Digits(integer = 10, fraction = 0)
+    @Min(value = 1, message = "Debe ser mayor o igual que 0")
     private int edad;
 
     @Column(nullable = false)
@@ -33,6 +43,7 @@ public class Usuario {
     private Boolean activo;
 
     @Column(nullable = false)
+
     private int rolid;
 
     public int getId() {
